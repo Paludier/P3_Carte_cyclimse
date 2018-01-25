@@ -1,19 +1,23 @@
-// First arg is used to get markers JSON data, second one to activate google map clusters (boolean)
+// activateClusters : true activate googlemap api clusters, false or empty disable them
 var mapProto = function (activateClusters) {
     // This variable is used to store the ID of the selected marker to show on the panel
     this.selectedMarker = '';
+    // this.array and this.marker are used to store API data for later use
     this.array = []
     this.marker = []
-    this.activateClusters = activateClusters;
+    if (activateClusters != ''){
+        this.activateClusters = activateClusters;
+    }
 }
 
+// Create HTML code for the map
 mapProto.prototype.init = function () {
     var mapDiv = document.createElement('div');
     mapDiv.id = 'map';
     document.getElementById('main').prepend(mapDiv);
 }
 
-// Center and zoom the map to selected marker ID
+// Zoom at selected marker ID
 mapProto.prototype.goToMarker = function (markerID) {
     for (i = 0; i < mapObj.array.length; i++) {
         if (this.array[i].number == markerID) {
@@ -24,6 +28,7 @@ mapProto.prototype.goToMarker = function (markerID) {
     }
 }
 
+// Exctracts data from specified cookie
 mapProto.prototype.getCookie = function (cname) {
     var name = cname + "=";
     var decodedCookie = decodeURIComponent(document.cookie);
@@ -40,7 +45,7 @@ mapProto.prototype.getCookie = function (cname) {
     return "";
 }
 
-// Create all markers and center the map at specified coordinates
+// Create and center the map at specified coordinates
 mapProto.prototype.initMap = function (centerLat, centerLng) {
     mapObj.map = new google.maps.Map(document.getElementById('map'), {
         center: {
@@ -52,6 +57,7 @@ mapProto.prototype.initMap = function (centerLat, centerLng) {
 
 }
 
+// if there is a expiration cookie, asks footer to display a timer and what station is booked
 mapProto.prototype.refreshFooter = function () {
     var cookie = this.getCookie('cookieExpiration');
     if (cookie != "") {
@@ -65,10 +71,11 @@ mapProto.prototype.refreshFooter = function () {
             document.getElementById('panelButton').textContent = 'Annuler';
         }
         panel.storedStation = storedStation;
-        footerObj.setCountdown();
+        mapObj.goToMarker(storedStation);
     };
 }
 
+// Displays markers on the map and actuvate clusters if mapObj.activateClusters is set on 'true'
 mapProto.prototype.refreshMarkers = function (centerLat, centerLng) {
     var marker = [];
     for (i = 0; i < mapObj.array.length; i++) {

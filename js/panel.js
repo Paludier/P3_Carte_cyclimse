@@ -5,12 +5,68 @@ var panelProto = function () {
     this.array = [];
 }
 
+// Create HTML code for the panel
+panelProto.prototype.init = function () {
+    var panelDiv = document.createElement('div');
+    var nameH2 = document.createElement('h2');
+    var statusH3 = document.createElement('h3');
+    var addressH3 = document.createElement('h3');
+    var p1 = document.createElement('p');
+    var available_Bikes_TitleSpan = document.createElement('span');
+    var available_BikesSpan = document.createElement('span');
+    var bike_StandsSpan = document.createElement('span');
+    var p2 = document.createElement('p');
+    var available_bike_standsSpan = document.createElement('span');
+    var p3 = document.createElement('p');
+    var bankingSpan = document.createElement('span');
+    var spanMarginSpan = document.createElement('span');
+    var bonusSpan = document.createElement('span');
+    var panelButtonP = document.createElement('p');
+    var hintBoxP = document.createElement('p');
+    panelDiv.id = 'panel';
+    panelDiv.className = 'themeBox';
+    nameH2.id = 'name';
+    nameH2.textContent = 'Selectionez une station';
+    statusH3.id = 'status';
+    addressH3.id = 'address';
+    p1.textContent = '/';
+    available_Bikes_TitleSpan.id = 'available_Bikes_Title';
+    available_Bikes_TitleSpan.textContent = 'Vélos disponibles : ';
+    available_BikesSpan.id = 'available_Bikes';
+    bike_StandsSpan.id = 'bike_Stands';
+    p2.textContent = 'Point(s) d\'attache disponible(s) : ';
+    available_bike_standsSpan.id = 'available_bike_stands';
+    p3.textContent = 'Terminal de paiement : ';
+    bankingSpan.id = 'banking';
+    spanMarginSpan.id = 'spanMargin';
+    spanMarginSpan.textContent = 'Station bonus : ';
+    bonusSpan.id = 'bonus';
+    panelButtonP.id = 'panelButton';
+    panelButtonP.className = 'panelButton panelButtonDisabled';
+    panelButtonP.textContent = 'Réserver';
+    hintBoxP.id = 'hintBox';
+    hintBoxP.className = 'hintBox';
+    p1.prepend(available_BikesSpan);
+    p1.prepend(available_Bikes_TitleSpan);
+    p1.appendChild(bike_StandsSpan);
+    p2.appendChild(available_bike_standsSpan);
+    spanMarginSpan.appendChild(bonusSpan);
+    p3.appendChild(bankingSpan);
+    p3.appendChild(spanMarginSpan);
+    panelDiv.appendChild(nameH2);
+    panelDiv.appendChild(statusH3);
+    panelDiv.appendChild(addressH3);
+    panelDiv.appendChild(p1);
+    panelDiv.appendChild(p2);
+    panelDiv.appendChild(p3);
+    panelDiv.appendChild(panelButtonP);
+    panelDiv.appendChild(hintBoxP);
+    document.getElementById('main').prepend(panelDiv);
+}
 
 // Refresh the panel with station data of the corresponding marker ID
 panelProto.prototype.panelRefresh = function (markerID) {
     this.array = mapObj.array;
-    //ajaxGet(url, function (response) {
-    //var array = JSON.parse(response);
     for (i = 0; i < this.array.length; i++) {
         if (this.array[i].number == markerID) {
             if (this.array[i].status == 'OPEN') {
@@ -72,11 +128,10 @@ panelProto.prototype.panelRefresh = function (markerID) {
             }
         }
     }
-    //});
 }
 
-// Create a cookie 'storedStation' containing the station ID, and a cookie 'cookieExpiration' containing the timestamp of the cookies's expiration date
-// Also calls panel.newStoredStation, subtract one bikr to 'available_Bikes' and refresh the panel button.
+// Create a cookie 'storedStation' containing the station ID, and 'cookieExpiration' containing the timestamp of the cookies's expiration date.
+// Also calls panel.newStoredStation, subtract one bike to 'available_Bikes' and refresh the panel button.
 panelProto.prototype.storeStation = function (markerID) {
     panel.newStoredStation(markerID);
     var date = new Date();
@@ -117,61 +172,23 @@ panelProto.prototype.removeStoredStation = function () {
     document.getElementById('storedStation').innerHTML = 'Aucun Vélo réservé';
 }
 
-
-panelProto.prototype.init = function () {
-    var panelDiv = document.createElement('div');
-    var nameH2 = document.createElement('h2');
-    var statusH3 = document.createElement('h3');
-    var addressH3 = document.createElement('h3');
-    var p1 = document.createElement('p');
-    var available_Bikes_TitleSpan = document.createElement('span');
-    var available_BikesSpan = document.createElement('span');
-    var bike_StandsSpan = document.createElement('span');
-    var p2 = document.createElement('p');
-    var available_bike_standsSpan = document.createElement('span');
-    var p3 = document.createElement('p');
-    var bankingSpan = document.createElement('span');
-    var spanMarginSpan = document.createElement('span');
-    var bonusSpan = document.createElement('span');
-    var panelButtonP = document.createElement('p');
-    var hintBoxP = document.createElement('p');
-    panelDiv.id = 'panel';
-    panelDiv.className = 'themeBox';
-    nameH2.id = 'name';
-    nameH2.textContent = 'Selectionez une station';
-    statusH3.id = 'status';
-    addressH3.id = 'address';
-    p1.textContent = '/';
-    available_Bikes_TitleSpan.id = 'available_Bikes_Title';
-    available_Bikes_TitleSpan.textContent = 'Vélos disponibles : ';
-    available_BikesSpan.id = 'available_Bikes';
-    bike_StandsSpan.id = 'bike_Stands';
-    p2.textContent = 'Point(s) d\'attache disponible(s) : ';
-    available_bike_standsSpan.id = 'available_bike_stands';
-    p3.textContent = 'Terminal de paiement : ';
-    bankingSpan.id = 'banking';
-    spanMarginSpan.id = 'spanMargin';
-    spanMarginSpan.textContent = 'Station bonus : ';
-    bonusSpan.id = 'bonus';
-    panelButtonP.id = 'panelButton';
-    panelButtonP.className = 'panelButton panelButtonDisabled';
-    panelButtonP.textContent = 'Réserver';
-    hintBoxP.id = 'hintBox';
-    hintBoxP.className = 'hintBox';
-    p1.prepend(available_BikesSpan);
-    p1.prepend(available_Bikes_TitleSpan);
-    p1.appendChild(bike_StandsSpan);
-    p2.appendChild(available_bike_standsSpan);
-    spanMarginSpan.appendChild(bonusSpan);
-    p3.appendChild(bankingSpan);
-    p3.appendChild(spanMarginSpan);
-    panelDiv.appendChild(nameH2);
-    panelDiv.appendChild(statusH3);
-    panelDiv.appendChild(addressH3);
-    panelDiv.appendChild(p1);
-    panelDiv.appendChild(p2);
-    panelDiv.appendChild(p3);
-    panelDiv.appendChild(panelButtonP);
-    panelDiv.appendChild(hintBoxP);
-    document.getElementById('main').prepend(panelDiv);
-}
+// Adds every event relative to the panel button
+document.addEventListener('click', function (event) {
+    if (event.target.id == 'panelButton' && panel.enabled && document.getElementById('panelButton').classList == 'panelButton panelButtonAvailable') {
+        footerObj.countdownOn = true;
+        panel.storeStation(mapObj.selectedMarker);
+        var expiration = parseInt(Math.floor(Date.now() / 1000)) + 1200;
+        var date = new Date();
+        date.setTime(date.getTime() + (4 * 5 * 60 * 1000));
+        var expires = "; expires=" + date.toGMTString();
+        document.cookie = "cookieExpiration=" + expiration + expires + "; path=/";
+        footerObj.setCountdown();
+    } else if (event.target.id == 'panelButton' && document.getElementById('panelButton').classList == 'panelButton panelButtonReserved') {
+        panel.removeStoredStation();
+        mapObj.map.setCenter({
+            lat: 45.753,
+            lng: 4.850
+        });
+        mapObj.map.setZoom(12);
+    }
+});

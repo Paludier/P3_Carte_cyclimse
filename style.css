@@ -1,7 +1,7 @@
 @font-face {
     font-family: 'ubuntubold';
     src: url('font/ubuntu-b-webfont.woff2') format('woff2'),
-         url('font/ubuntu-b-webfont.woff') format('woff');
+    url('font/ubuntu-b-webfont.woff') format('woff');
     font-weight: bold;
     font-style: normal;
 }
@@ -9,7 +9,7 @@
 @font-face {
     font-family: 'ubunturegular';
     src: url('font/ubuntu-r-webfont.woff2') format('woff2'),
-         url('font/ubuntu-r-webfont.woff') format('woff');
+    url('font/ubuntu-r-webfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
@@ -18,10 +18,10 @@
     font-family: 'pt_serifregular';
     src: url('font/PTF55F-webfont.eot');
     src: url('font/PTF55F-webfont.eot?#iefix') format('embedded-opentype'),
-         url('font/PTF55F-webfont.woff2') format('woff2'),
-         url('font/PTF55F-webfont.woff') format('woff'),
-         url('font/PTF55F-webfont.ttf') format('truetype'),
-         url('font/PTF55F-webfont.svg#pt_serifregular') format('svg');
+    url('font/PTF55F-webfont.woff2') format('woff2'),
+    url('font/PTF55F-webfont.woff') format('woff'),
+    url('font/PTF55F-webfont.ttf') format('truetype'),
+    url('font/PTF55F-webfont.svg#pt_serifregular') format('svg');
     font-weight: normal;
     font-style: normal;
 }
@@ -30,10 +30,10 @@
     font-family: 'pt_serifbold';
     src: url('font/PTF75F-webfont.eot');
     src: url('font/PTF75F-webfont.eot?#iefix') format('embedded-opentype'),
-         url('font/PTF75F-webfont.woff2') format('woff2'),
-         url('font/PTF75F-webfont.woff') format('woff'),
-         url('font/PTF75F-webfont.ttf') format('truetype'),
-         url('font/PTF75F-webfont.svg#pt_serifbold') format('svg');
+    url('font/PTF75F-webfont.woff2') format('woff2'),
+    url('font/PTF75F-webfont.woff') format('woff'),
+    url('font/PTF75F-webfont.ttf') format('truetype'),
+    url('font/PTF75F-webfont.svg#pt_serifbold') format('svg');
     font-weight: normal;
     font-style: normal;
 }
@@ -42,10 +42,10 @@
     font-family: 'pt_serifitalic';
     src: url('font/PTF56F-webfont.eot');
     src: url('font/PTF56F-webfont.eot?#iefix') format('embedded-opentype'),
-         url('font/PTF56F-webfont.woff2') format('woff2'),
-         url('font/PTF56F-webfont.woff') format('woff'),
-         url('font/PTF56F-webfont.ttf') format('truetype'),
-         url('font/PTF56F-webfont.svg#pt_serifitalic') format('svg');
+    url('font/PTF56F-webfont.woff2') format('woff2'),
+    url('font/PTF56F-webfont.woff') format('woff'),
+    url('font/PTF56F-webfont.ttf') format('truetype'),
+    url('font/PTF56F-webfont.svg#pt_serifitalic') format('svg');
     font-weight: normal;
     font-style: normal;
 }
@@ -55,11 +55,14 @@ body {
     align-content: flex;
     background-color: #15171c;
 }
-html, body {
+
+html,
+body {
     height: 100%;
     margin: 0;
     padding: 0;
 }
+
 .themeBox {
     border: 2px solid #434857;
     background-color: #252830;
@@ -72,6 +75,7 @@ html, body {
     width: 1200px;
     margin: auto;
 }
+
 header {
     height: 10%;
     width: (100% - 4px);
@@ -79,7 +83,8 @@ header {
     border-top-right-radius: 10px;
     text-align: center;
 }
-#diaporama {
+
+#slideShow {
     display: flex;
     height: 30%;
     border-top: 0px;
@@ -92,7 +97,8 @@ header {
     -ms-user-select: none;
     user-select: none;
 }
-.arrow{
+
+.arrow {
     position: relative;
     z-index: 150;
     opacity: 0.8;
@@ -107,22 +113,26 @@ header {
     -ms-user-select: none;
     user-select: none;
 }
-.leftArrow{
+
+.leftArrow {
     transform: rotate(180deg);
     float: left;
     margin-left: 10px;
 }
-.rightArrow{
+
+.rightArrow {
     float: right;
     margin-right: 10px;
 }
-.diapoImg{
+
+.slideShowImg {
     position: relative;
-    min-width:100%;
+    min-width: 100%;
     left: 0px;
     transition: 1s;
 }
-.diapoShadow {
+
+.slideShowShadow {
     position: absolute;
     z-index: 10;
     box-shadow: rgb(0, 0, 10) 0px 0px 356px -15px inset;
@@ -130,15 +140,18 @@ header {
     height: 30%;
     overflow: hidden;
 }
+
 /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
+
 #map {
     border: 2px solid #434857;
     float: left;
     height: 50%;
     width: 700px;
 }
-#mapFaded{
+
+#mapFaded {
     margin-left: 2px;
     z-index: 10;
     background-color: black;
@@ -146,12 +159,13 @@ header {
     height: 500px;
     width: 700px;
     user-select: none;
-        -moz-user-select: none;
-        -khtml-user-select: none;
-        -webkit-user-select: none;
-        -o-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -o-user-select: none;
     pointer-events: none;
 }
+
 #mapFaded.fadeOn {
     -webkit-transition: 0.7s;
     -moz-transition: 0.7s;
@@ -161,6 +175,7 @@ header {
     opacity: 0.5;
     pointer-events: all;
 }
+
 #mapFaded.fadeOff {
     -webkit-transition: 0.7s;
     -moz-transition: 0.7s;
@@ -170,20 +185,24 @@ header {
     opacity: 0;
     pointer-events: none;
 }
+
 #panel {
     margin-left: 696px;
     height: 50vh;
     width: 500px;
     text-align: center;
 }
+
 #name {
     padding-top: 50px;
 }
-#spanMargin{
+
+#spanMargin {
     margin-left: 15px;
     padding-left: 15px;
 }
-.panelButton{
+
+.panelButton {
     margin: auto;
     height: 50px;
     width: 150px;
@@ -202,42 +221,49 @@ header {
     user-select: none;
 }
 
-.panelButtonAvailable{
+.panelButtonAvailable {
     color: #28a745;
     border-color: #28a745;
     cursor: pointer;
 }
-.panelButtonDisabled{
+
+.panelButtonDisabled {
     color: #434857;
     border-color: #434857;
     background-color: #232837;
     cursor: default;
 }
-.panelButtonReserved{
+
+.panelButtonReserved {
     color: #dc3545;
     border-color: #dc3545;
     background-color: #232837;
     cursor: pointer;
 }
-.panelButtonDisabled:hover{
+
+.panelButtonDisabled:hover {
     background-color: #232837;
 }
-.panelButton:hover{
+
+.panelButton:hover {
     color: #434857;
     border-color: #434857;
     background-color: #28a745;
 }
-.panelButtonReserved:hover{
+
+.panelButtonReserved:hover {
     color: #434857;
     border-color: #434857;
     background-color: #dc3545;
 }
-.hintBox{
+
+.hintBox {
     z-index: 500;
     bottom: -10px;
     left: 187px;
     color: #434857;
 }
+
 footer {
     position: fixed;
     bottom: 0px;
@@ -248,7 +274,8 @@ footer {
     border-bottom-right-radius: 10px;
     text-align: center;
 }
-#storedStation{
+
+#storedStation {
     position: relative;
     top: -25px;
     font-size: 35px;
@@ -260,7 +287,7 @@ footer p {
     top: -60px;
 }
 
-.footerButton{
+.footerButton {
     position: absolute;
     top: 1px;
     margin-left: 10px;
@@ -283,15 +310,16 @@ footer p {
     -ms-user-select: none;
     user-select: none;
 }
-.footerButton:hover{
+
+.footerButton:hover {
     color: #434857;
     border-color: #434857;
     background-color: #586fcf;
-    transition: 0.2s 
+    transition: 0.2s
 }
 
 @media only screen and (max-width: 1200px) {
-    #main{
+    #main {
         width: auto;
     }
     #map {
@@ -303,18 +331,18 @@ footer p {
         float: none;
         width: auto;
     }
-    .diapoShadow {
+    .slideShowShadow {
         width: 100%;
     }
-    .diapoImg{
-        min-width:auto;
+    .slideShowImg {
+        min-width: auto;
         max-width: 100%;
     }
-    footer{
+    footer {
         position: static;
         width: auto;
     }
-    .storedStation{
+    .storedStation {
         font-size: 8em;
     }
 }
