@@ -1,90 +1,90 @@
-var panelProto = function(){
+var panelProto = function () {
     // used to store the ID of the station when it is booked by the user, or when mapObj.initMap is called if there is a , 
     this.storedStation = '';
-    this.enabled = false;  
-    this.array = [];  
+    this.enabled = false;
+    this.array = [];
 }
 
 
 // Refresh the panel with station data of the corresponding marker ID
-panelProto.prototype.panelRefresh = function(markerID){
+panelProto.prototype.panelRefresh = function (markerID) {
     this.array = mapObj.array;
     //ajaxGet(url, function (response) {
-        //var array = JSON.parse(response);
-        for (i = 0; i < this.array.length; i++){
-            if (this.array[i].number == markerID){
-                if (this.array[i].status == 'OPEN') {
-                    var statusTrad = 'Ouvert';
-                } else {
-                    var statusTrad = 'Fermé';
-                }
-                if (this.array[i].banking == true) {
-                    var bankingTrad = 'Oui';
-                } else {
-                    var bankingTrad = 'Non';
-                }
-                if (this.array[i].bonus == true) {
-                    var bonusTrad = 'Oui';
-                } else {
-                    var bonusTrad = 'Non';
-                }
-                document.getElementById('name').textContent = this.array[i].name;
-                document.getElementById('status').textContent = statusTrad;
-                if (statusTrad == 'Ouvert'){
-                    document.getElementById('status').style.color = '#28a745';
-                } else {
-                    document.getElementById('status').style.color = '#434857';
-                }
-                document.getElementById('address').textContent = this.array[i].address;
-                document.getElementById('bike_Stands').textContent = this.array[i].bike_stands;
-                document.getElementById('available_bike_stands').textContent = this.array[i].available_bike_stands;
-                document.getElementById('banking').textContent = bankingTrad;
-                document.getElementById('bonus').textContent = bonusTrad;
-                var bikes = this.array[i].available_bikes;
-                if (mapObj.selectedMarker == panel.storedStation) {
-                    bikes--;
-                }
-                document.getElementById('available_Bikes').textContent = bikes;
-                if (this.array[i].available_bikes == 0) {
-                    document.getElementById('available_Bikes').style.color = 'red';
-                    document.getElementById('panelButton').classList = 'panelButton panelButtonDisabled';
-                    panel.enabled = false;
-                } else if (this.array[i].available_bikes == 1){
-                    document.getElementById('available_Bikes_Title').textContent = 'Vélo disponible : ';
-                    document.getElementById('panelButton').classList = 'panelButton panelButtonAvailable';
-                    document.getElementById('available_Bikes').style.color = 'white';
-                    panel.enabled = true;
-                    console.log('allo?');
-                } else {
-                    document.getElementById('available_Bikes').style.color = 'white';
-                    document.getElementById('available_Bikes_Title').textContent = 'Vélos disponibles : ';
-                    document.getElementById('panelButton').classList = 'panelButton panelButtonAvailable';
-                    panel.enabled = true;
-                }
-                if (panel.storedStation == this.array[i].number){
-                    document.getElementById('panelButton').classList = 'panelButton panelButtonReserved';
-                    document.getElementById('panelButton').textContent = 'Annuler'
-                    document.getElementById('hintBox').textContent = '';
-                } else if (panel.storedStation != ''){
-                    document.getElementById('panelButton').classList = 'panelButton panelButtonDisabled';
-                    document.getElementById('panelButton').textContent = 'Réserver';
-                    document.getElementById('hintBox').textContent = 'Vélo déjà réserver';
-                }
+    //var array = JSON.parse(response);
+    for (i = 0; i < this.array.length; i++) {
+        if (this.array[i].number == markerID) {
+            if (this.array[i].status == 'OPEN') {
+                var statusTrad = 'Ouvert';
+            } else {
+                var statusTrad = 'Fermé';
+            }
+            if (this.array[i].banking == true) {
+                var bankingTrad = 'Oui';
+            } else {
+                var bankingTrad = 'Non';
+            }
+            if (this.array[i].bonus == true) {
+                var bonusTrad = 'Oui';
+            } else {
+                var bonusTrad = 'Non';
+            }
+            document.getElementById('name').textContent = this.array[i].name;
+            document.getElementById('status').textContent = statusTrad;
+            if (statusTrad == 'Ouvert') {
+                document.getElementById('status').style.color = '#28a745';
+            } else {
+                document.getElementById('status').style.color = '#434857';
+            }
+            document.getElementById('address').textContent = this.array[i].address;
+            document.getElementById('bike_Stands').textContent = this.array[i].bike_stands;
+            document.getElementById('available_bike_stands').textContent = this.array[i].available_bike_stands;
+            document.getElementById('banking').textContent = bankingTrad;
+            document.getElementById('bonus').textContent = bonusTrad;
+            var bikes = this.array[i].available_bikes;
+            if (mapObj.selectedMarker == panel.storedStation) {
+                bikes--;
+            }
+            document.getElementById('available_Bikes').textContent = bikes;
+            if (this.array[i].available_bikes == 0) {
+                document.getElementById('available_Bikes').style.color = 'red';
+                document.getElementById('panelButton').classList = 'panelButton panelButtonDisabled';
+                panel.enabled = false;
+            } else if (this.array[i].available_bikes == 1) {
+                document.getElementById('available_Bikes_Title').textContent = 'Vélo disponible : ';
+                document.getElementById('panelButton').classList = 'panelButton panelButtonAvailable';
+                document.getElementById('available_Bikes').style.color = 'white';
+                panel.enabled = true;
+                console.log('allo?');
+            } else {
+                document.getElementById('available_Bikes').style.color = 'white';
+                document.getElementById('available_Bikes_Title').textContent = 'Vélos disponibles : ';
+                document.getElementById('panelButton').classList = 'panelButton panelButtonAvailable';
+                panel.enabled = true;
+            }
+            if (panel.storedStation == this.array[i].number) {
+                document.getElementById('panelButton').classList = 'panelButton panelButtonReserved';
+                document.getElementById('panelButton').textContent = 'Annuler'
+                document.getElementById('hintBox').textContent = '';
+            } else if (panel.storedStation != '') {
+                document.getElementById('panelButton').classList = 'panelButton panelButtonDisabled';
+                document.getElementById('panelButton').textContent = 'Réserver';
+                document.getElementById('hintBox').textContent = 'Vélo déjà réserver';
             }
         }
+    }
     //});
 }
 
 // Create a cookie 'storedStation' containing the station ID, and a cookie 'cookieExpiration' containing the timestamp of the cookies's expiration date
 // Also calls panel.newStoredStation, subtract one bikr to 'available_Bikes' and refresh the panel button.
-panelProto.prototype.storeStation = function(markerID){
+panelProto.prototype.storeStation = function (markerID) {
     panel.newStoredStation(markerID);
     var date = new Date();
-    date.setTime(date.getTime()+(4*5*60*1000));
-    var expires = "; expires="+date.toGMTString();
+    date.setTime(date.getTime() + (4 * 5 * 60 * 1000));
+    var expires = "; expires=" + date.toGMTString();
     document.cookie = "storedStation=" + markerID + expires + "; path=/";
     footerObj.setCountdown();
-    if (markerID == mapObj.selectedMarker){
+    if (markerID == mapObj.selectedMarker) {
         document.getElementById('available_Bikes').textContent = parseInt(document.getElementById('available_Bikes').textContent) - 1;
         document.getElementById('panelButton').classList = 'panelButton panelButtonReserved';
         document.getElementById('panelButton').textContent = 'Annuler';
@@ -92,10 +92,10 @@ panelProto.prototype.storeStation = function(markerID){
 }
 
 // Refresh the footer when a new bike is booked, and store the booked station ID to panel.storedStation.
-panelProto.prototype.newStoredStation = function(storedStation){
+panelProto.prototype.newStoredStation = function (storedStation) {
     this.array = mapObj.array;
-    for (i = 0; i < this.array.length; i++){
-        if (this.array[i].number == storedStation){
+    for (i = 0; i < this.array.length; i++) {
+        if (this.array[i].number == storedStation) {
             this.array[i].available_bikes = this.array[i].available_bikes - 1;
             document.getElementById('storedStation').innerHTML = 'Vélo réservé : ' + this.array[i].name + ' <a id=\'footerButton\' class=\'footerButton\'>=></a>';
         }
@@ -105,7 +105,7 @@ panelProto.prototype.newStoredStation = function(storedStation){
 
 
 // Remove storedStation and cookieExpiration cookies, add a bike to 'available_Bikes',refresh the panel button and the footer.
-panelProto.prototype.removeStoredStation = function(){
+panelProto.prototype.removeStoredStation = function () {
     document.cookie = "storedStation=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     document.cookie = "cookieExpiration=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     footerObj.countdownOn = false;
@@ -116,9 +116,9 @@ panelProto.prototype.removeStoredStation = function(){
     document.getElementById('panelButton').textContent = 'Réserver';
     document.getElementById('storedStation').innerHTML = 'Aucun Vélo réservé';
 }
-    
-    
-panelProto.prototype.init = function(){
+
+
+panelProto.prototype.init = function () {
     var panelDiv = document.createElement('div');
     var nameH2 = document.createElement('h2');
     var statusH3 = document.createElement('h3');

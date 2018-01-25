@@ -1,6 +1,6 @@
-var headerProto = function(){}
+var headerProto = function () {}
 
-headerProto.prototype.init = function(){
+headerProto.prototype.init = function () {
     var header = document.createElement('header');
     var h2 = document.createElement('h2');
     header.className = 'themeBox';

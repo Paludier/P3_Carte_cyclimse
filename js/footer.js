@@ -1,12 +1,12 @@
-var footerProto = function(){
+var footerProto = function () {
     this.countdownOn = false;
 }
 
-footerProto.prototype.setCountdown = function(){
+footerProto.prototype.setCountdown = function () {
     var now = Math.floor(Date.now() / 1000);
     var countdown = mapObj.getCookie('cookieExpiration') - now;
-    var x = setInterval(function() {
-        if (footerObj.countdownOn == true){
+    var x = setInterval(function () {
+        if (footerObj.countdownOn == true) {
             var date = new Date(null);
             date.setSeconds(countdown);
             var result = date.toISOString().substr(14, 5);
@@ -22,7 +22,7 @@ footerProto.prototype.setCountdown = function(){
     }, 1000);
 }
 
-footerProto.prototype.init = function(){
+footerProto.prototype.init = function () {
     var footer = document.createElement('footer');
     var storedStationH2 = document.createElement('h2');
     var timerP = document.createElement('p');
