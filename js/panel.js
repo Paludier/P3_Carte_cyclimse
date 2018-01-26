@@ -94,7 +94,13 @@ panelProto.prototype.panelRefresh = function (markerID) {
             document.getElementById('address').textContent = this.array[i].address;
             document.getElementById('bike_Stands').textContent = this.array[i].bike_stands;
             document.getElementById('available_bike_stands').textContent = this.array[i].available_bike_stands;
-            document.getElementById('banking').textContent = bankingTrad;
+            var width = document.body.clientWidth;
+            console.log(width);
+            if (width <= 1200) {
+                document.getElementById('banking').innerHTML = bankingTrad + '</br>';
+            } else {
+                document.getElementById('banking').textContent = bankingTrad;
+            }
             document.getElementById('bonus').textContent = bonusTrad;
             var bikes = this.array[i].available_bikes;
             if (mapObj.selectedMarker == panel.storedStation) {
@@ -152,7 +158,13 @@ panelProto.prototype.newStoredStation = function (storedStation) {
     for (i = 0; i < this.array.length; i++) {
         if (this.array[i].number == storedStation) {
             this.array[i].available_bikes = this.array[i].available_bikes - 1;
-            document.getElementById('storedStation').innerHTML = 'Vélo réservé : ' + this.array[i].name + ' <a id=\'footerButton\' class=\'footerButton\'>=></a>';
+            var width = document.body.clientWidth;
+            console.log(width);
+            if (width <= 1200) {
+                document.getElementById('storedStation').innerHTML = 'Vélo réservé : ' + this.array[i].name + ' </br><a id=\'footerButton\' class=\'footerButton\'>=></a>';
+            } else {
+                document.getElementById('storedStation').innerHTML = 'Vélo réservé : ' + this.array[i].name + ' <a id=\'footerButton\' class=\'footerButton\'>=></a>';
+            }
         }
     }
     panel.storedStation = storedStation;

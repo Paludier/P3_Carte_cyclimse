@@ -322,6 +322,9 @@ footer p {
     #main {
         width: auto;
     }
+    #slideShow {
+        display: none;
+    }
     #map {
         float: none;
         width: auto;
@@ -330,19 +333,36 @@ footer p {
         margin-left: auto;
         float: none;
         width: auto;
+        height: 420px;
     }
-    .slideShowShadow {
-        width: 100%;
+    #name {
+        padding-top: 0px; 
     }
-    .slideShowImg {
-        min-width: auto;
-        max-width: 100%;
+    #spanMargin {
+        margin-left: 0px;
+        padding-left: 0px;
     }
     footer {
         position: static;
         width: auto;
+        height: auto;
     }
-    .storedStation {
-        font-size: 8em;
+    
+    #storedStation {
+        font-size: 25px;
+        margin-top: 50px;
+    }
+    .footerButton {
+        position: relative;
+        top: 5px;
+    }
+    #timer {
+        position: relative;
+        top: -35px;
+    }
+}
+@media only screen and (max-height: 790px) {
+    #name {
+        padding-top: 0px; 
     }
 }
