@@ -318,6 +318,38 @@ footer p {
     transition: 0.2s
 }
 
+.signaturePrompt {
+    position: fixed;
+    width: 500px;
+    height: 300px;
+    left: calc(50vw - 250px);
+    top: calc(50vh - 150px);
+    z-index: 100;
+    border-radius: 10px;
+    align-content: center;
+}
+
+.signTitle {
+    position: relative;
+    margin-left: 175px;
+    margin-top: 4px;
+}
+
+.signaturePrompt canvas {
+    background-color: white;
+    border: 2px solid #434857;
+    position: relative;
+    left: 20px;
+    top: -15px;
+}
+
+.signPromptButton {
+    position: relative;
+    top: -7px;
+    text-align: center;
+    color: #28a745;
+}
+
 @media only screen and (max-width: 1200px) {
     #main {
         width: auto;

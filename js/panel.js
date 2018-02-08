@@ -95,7 +95,6 @@ panelProto.prototype.panelRefresh = function (markerID) {
             document.getElementById('bike_Stands').textContent = this.array[i].bike_stands;
             document.getElementById('available_bike_stands').textContent = this.array[i].available_bike_stands;
             var width = document.body.clientWidth;
-            console.log(width);
             if (width <= 1200) {
                 document.getElementById('banking').innerHTML = bankingTrad + '</br>';
             } else {
@@ -116,7 +115,6 @@ panelProto.prototype.panelRefresh = function (markerID) {
                 document.getElementById('panelButton').classList = 'panelButton panelButtonAvailable';
                 document.getElementById('available_Bikes').style.color = 'white';
                 panel.enabled = true;
-                console.log('allo?');
             } else {
                 document.getElementById('available_Bikes').style.color = 'white';
                 document.getElementById('available_Bikes_Title').textContent = 'Vélos disponibles : ';
@@ -140,11 +138,7 @@ panelProto.prototype.panelRefresh = function (markerID) {
 // Also calls panel.newStoredStation, subtract one bike to 'available_Bikes' and refresh the panel button.
 panelProto.prototype.storeStation = function (markerID) {
     panel.newStoredStation(markerID);
-    var date = new Date();
-    date.setTime(date.getTime() + (4 * 5 * 60 * 1000));
-    var expires = "; expires=" + date.toGMTString();
-    document.cookie = "storedStation=" + markerID + expires + "; path=/";
-    footerObj.setCountdown();
+    sessionStorage.setItem('storedStation', markerID);
     if (markerID == mapObj.selectedMarker) {
         document.getElementById('available_Bikes').textContent = parseInt(document.getElementById('available_Bikes').textContent) - 1;
         document.getElementById('panelButton').classList = 'panelButton panelButtonReserved';
@@ -159,7 +153,6 @@ panelProto.prototype.newStoredStation = function (storedStation) {
         if (this.array[i].number == storedStation) {
             this.array[i].available_bikes = this.array[i].available_bikes - 1;
             var width = document.body.clientWidth;
-            console.log(width);
             if (width <= 1200) {
                 document.getElementById('storedStation').innerHTML = 'Vélo réservé : ' + this.array[i].name + ' </br><a id=\'footerButton\' class=\'footerButton\'>=></a>';
             } else {
@@ -171,10 +164,9 @@ panelProto.prototype.newStoredStation = function (storedStation) {
 }
 
 
-// Remove storedStation and cookieExpiration cookies, add a bike to 'available_Bikes',refresh the panel button and the footer.
+// Remove sessionStorage data, add a bike to 'available_Bikes', refresh the panel button and the footer.
 panelProto.prototype.removeStoredStation = function () {
-    document.cookie = "storedStation=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-    document.cookie = "cookieExpiration=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    sessionStorage.clear();
     footerObj.countdownOn = false;
     document.getElementById('timer').innerHTML = '';
     panel.storedStation = '';
@@ -187,14 +179,7 @@ panelProto.prototype.removeStoredStation = function () {
 // Adds every event relative to the panel button
 document.addEventListener('click', function (event) {
     if (event.target.id == 'panelButton' && panel.enabled && document.getElementById('panelButton').classList == 'panelButton panelButtonAvailable') {
-        footerObj.countdownOn = true;
-        panel.storeStation(mapObj.selectedMarker);
-        var expiration = parseInt(Math.floor(Date.now() / 1000)) + 1200;
-        var date = new Date();
-        date.setTime(date.getTime() + (4 * 5 * 60 * 1000));
-        var expires = "; expires=" + date.toGMTString();
-        document.cookie = "cookieExpiration=" + expiration + expires + "; path=/";
-        footerObj.setCountdown();
+        signaturePrompt.init();
     } else if (event.target.id == 'panelButton' && document.getElementById('panelButton').classList == 'panelButton panelButtonReserved') {
         panel.removeStoredStation();
         mapObj.map.setCenter({

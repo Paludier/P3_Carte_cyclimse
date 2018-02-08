@@ -18,6 +18,8 @@ slideShow.init();
 var header = new headerProto(true);
 header.init();
 
+var signaturePrompt = new signProto();
+
 // Ajax request function
 function ajaxGet(url, callback) {
     var req = new XMLHttpRequest();
@@ -61,3 +63,14 @@ function precisionRound(number, precision) {
     var factor = Math.pow(10, precision);
     return Math.round(number * factor) / factor;
 }
+
+document.addEventListener('click', function (event) {
+        if (event.target.id == 'signPromptButton'){
+            footerObj.countdownOn = true;
+            panel.storeStation(mapObj.selectedMarker);
+            var expiration = parseInt(Math.floor(Date.now() / 1000)) + 1200;
+            sessionStorage.setItem('Expiration', expiration);
+            footerObj.setCountdown();
+            document.getElementById('signaturePrompt').remove();
+        }
+    });

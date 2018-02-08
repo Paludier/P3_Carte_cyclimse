@@ -19,7 +19,7 @@ footerProto.prototype.init = function () {
 // show in the footer what time is left before reservation expiration
 footerProto.prototype.setCountdown = function () {
     var now = Math.floor(Date.now() / 1000);
-    var countdown = mapObj.getCookie('cookieExpiration') - now;
+    var countdown = mapObj.getStoredData('Expiration') - now;
     var x = setInterval(function () {
         if (footerObj.countdownOn == true) {
             var date = new Date(null);
@@ -29,12 +29,14 @@ footerProto.prototype.setCountdown = function () {
             if (countdown < 0) {
                 clearInterval(x);
                 document.getElementById("timer").innerHTML = "Réservation expirée";
+                panel.removeStoredStation();
             }
             countdown--;
         } else {
             clearInterval(x);
         }
     }, 1000);
+    
 }
 
 // event that zoom the map in the selected station if the blue footer button is clicked

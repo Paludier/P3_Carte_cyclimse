@@ -28,21 +28,10 @@ mapProto.prototype.goToMarker = function (markerID) {
     }
 }
 
-// Exctracts data from specified cookie
-mapProto.prototype.getCookie = function (cname) {
-    var name = cname + "=";
-    var decodedCookie = decodeURIComponent(document.cookie);
-    var ca = decodedCookie.split(';');
-    for (var i = 0; i < ca.length; i++) {
-        var c = ca[i];
-        while (c.charAt(0) == ' ') {
-            c = c.substring(1);
-        }
-        if (c.indexOf(name) == 0) {
-            return c.substring(name.length, c.length);
-        }
-    }
-    return "";
+// Exctracts data from specified key
+mapProto.prototype.getStoredData = function (cname) {
+    var data = sessionStorage.getItem(cname);
+    return data;
 }
 
 // Create and center the map at specified coordinates
@@ -57,11 +46,11 @@ mapProto.prototype.initMap = function (centerLat, centerLng) {
 
 }
 
-// if there is a expiration cookie, asks footer to display a timer and what station is booked
+// if there is a expiration stored key, asks footer to display a timer and what station is booked
 mapProto.prototype.refreshFooter = function () {
-    var cookie = this.getCookie('cookieExpiration');
-    if (cookie != "") {
-        var storedStation = this.getCookie("storedStation");
+    var data = this.getStoredData('Expiration');
+    if (data != null) {
+        var storedStation = this.getStoredData("storedStation");
         footerObj.countdownOn = true;
         panel.newStoredStation(storedStation);
         footerObj.setCountdown();
@@ -72,7 +61,7 @@ mapProto.prototype.refreshFooter = function () {
         }
         panel.storedStation = storedStation;
         mapObj.goToMarker(storedStation);
-    };
+    }
 }
 
 // Displays markers on the map and actuvate clusters if mapObj.activateClusters is set on 'true'
