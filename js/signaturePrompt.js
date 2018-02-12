@@ -26,17 +26,21 @@ signProto.prototype.init = function () {
     var context = canvas.getContext('2d');
 
     $('#canvas').mousedown(function(e){
-      var mouseX = e.pageX - this.offsetLeft;
-      var mouseY = e.pageY - this.offsetTop;
-
+        var box = document.getElementById('signaturePrompt');
+      var mouseX = e.pageX - (box.offsetLeft + 20);
+      var mouseY = e.pageY - (box.offsetTop + 32);
+    console.log('e.pageX = ' + e.pageX + ', box.offsetLeft = ' + (box.offsetLeft + 20) + ', mouseX = ' + mouseX);
+    console.log('e.pageY = ' + e.pageY + ', box.offsetTop = ' + (box.offsetTop + 32) + ', mouseY = ' + mouseX);
+    console.log(' ');
       paint = true;
-      addClick(e.pageX - this.offsetLeft, e.pageY - this.offsetTop);
+      addClick(e.pageX - (box.offsetLeft + 20), e.pageY - (box.offsetTop + 32));
       redraw();
     });
 
     $('#canvas').mousemove(function(e){
       if(paint){
-        addClick(e.pageX - this.offsetLeft, e.pageY - this.offsetTop, true);
+          var box = document.getElementById('signaturePrompt');
+        addClick(e.pageX - (box.offsetLeft + 20), e.pageY - (box.offsetTop + 32), true);
         redraw();
       }
     });
@@ -56,8 +60,8 @@ signProto.prototype.init = function () {
 
     function addClick(x, y, dragging)
     {
-      clickX.push(x-590);
-      clickY.push(y-342);
+      clickX.push(x);
+      clickY.push(y);
       clickDrag.push(dragging);
     }
 
